@@ -58,3 +58,46 @@ e executar o comando abaixo:
 ```shell script
 go test
 ```
+
+Ou se preferir executar um conjunto de testes:
+```shell script
+go test ./...
+```
+
+### Observações
+
+* Caso você tenha uma suíte de testes grande, talvez seja necessário rodar os testes de
+forma paralela. Para fazer isso, basta adicionar a seguinte linha de código no ínicio
+de seu teste:
+```go
+func TestAbc(t *testing.T) {
+    t.Parallel()
+    ...
+}
+```
+
+* Para pular um teste:
+```go
+    t.Skip("Pulei este teste devido...")
+```
+
+* Para forçar um erro no teste:
+```go
+    t.Fail()
+```
+
+* Verificar a cobertura dos testes:
+```shell script
+    go test -cover
+```
+
+* Verificar a cobertura dos testes:
+```shell script
+    go test -cover
+```
+
+* Gerando cover profile e exibindo em um .html:
+```shell script
+    go test -coverprofile=resultado.out
+    go tool cover -html=resultado.out
+```

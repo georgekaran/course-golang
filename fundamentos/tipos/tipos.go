@@ -51,5 +51,5 @@ func main() {
 
 	// char = int32
 	char := 'a'
-	fmt.Println("O tipo de char é", reflect.TypeOf(char))
+	fmt.Println("Valor:", char, "Tipo:", reflect.TypeOf(char))
 }

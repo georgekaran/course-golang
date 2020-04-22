@@ -19,5 +19,5 @@ func main() {
 
 	fmt.Println(aprovados[12345678])
 	delete(aprovados, 12345678)
-	fmt.Println(aprovados[12345678])
+	fmt.Println(aprovados)
 }

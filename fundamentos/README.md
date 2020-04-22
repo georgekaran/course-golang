@@ -186,3 +186,119 @@ char := 'a'
 fmt.Println("Valor:", char, "Tipo:", reflect.TypeOf(char))
 // Valor: 97 Tipo: int32
 ```
+
+### Valores defaults
+
+Como vimos anteriormente, em Go quando se declara uma variável não é necessário
+atribuir um valor para o mesmo contanto que o tipo seja informado. Mas afinal qual
+é o valor default para cada tipo?
+
+```go
+var a int // 0
+var b float64 // 0
+var c bool // false
+var d string // ""
+var e *int // <nil>
+
+fmt.Printf("%v %v %v %q %v\n", a, b, c, d, e)
+// 0 0 false "" <nil>
+```
+
+### Conversão entre tipos básicos
+
+#### Convertendo valores para decimal:
+
+```go
+inteiro := 1
+decimal := float64(inteiro)
+fmt.Println("Valor:", decimal, "Tipo:", reflect.TypeOf(decimal))
+// Valor: 1 Tipo: float64
+```
+
+#### Convertendo valores para inteiro:
+
+```go
+decimal := 1.5
+inteiro := int(decimal) // Arredondamento é feito para baixo...
+fmt.Println("Valor:", inteiro, "Tipo:", reflect.TypeOf(inteiro))
+// Valor: 1 Tipo: int
+```
+
+#### Convertendo inteiro para string:
+
+```go
+import "strconv"
+...
+str := strconv.Itoa(123)
+fmt.Println("Valor:", str, "Tipo:", reflect.TypeOf(str))
+// Valor: 123 Tipo: string
+```
+
+#### Convertendo string para inteiro:
+
+```go
+import "strconv"
+...
+num, _ := strconv.Atoi("123") // Esse método retorna dois valores, o primeiro é o número convertido e o segundo é um erro caso o número seja inválido.
+fmt.Println("Valor:", num, "Tipo:", reflect.TypeOf(num))
+// Valor: 123 Tipo: int
+```
+
+#### Convertendo string para boolean:
+
+```go
+import "strconv"
+...
+b, _ := strconv.ParseBool("true") // Esse método retorna dois valores, o primeiro é o número convertido e o segundo é um erro caso o número seja inválido.
+fmt.Println("Valor:", b, "Tipo:", reflect.TypeOf(b))
+// Valor: true Tipo: bool
+```
+
+### Criando uma função básica
+
+Sabemos que para o ponto de partida de um programa Go é a função main, mas podemos
+criar outras funções para fazer pequenas atividades em blocos.
+
+```go
+package main
+
+import "fmt"
+
+// Devemos explicitamente declarar os parâmetros e o retorno de uma função
+func somar(x int, y int) int {
+	return x + y
+}
+
+func main() {
+    fmt.Println("Soma:", somar(5, 10))
+}
+```
+
+Este foi um pequeno exemplo de funções, ainda teremos um capítulo completo sobre
+esse assunto.
+
+### Ponteiros em Go
+
+OBS: Diferente de outras linguagens, em Go não é possível fazer aritmética em cima de 
+ponteiros.
+
+Declarando um ponteiro em Go:
+
+```go
+var p *int = nil
+```
+
+Pegando a referência de memória e alterando o valor através de ponteiro:
+
+```go
+i := 1
+var p *int = nil
+
+p = &i // Aqui estou pegando o endereço de memória da variável i.
+fmt.Println(p, *p, i, &i)
+// 0xc0000a4010 1 1 0xc0000a4010
+
+*p++ // Desreferenciando (pegando o valor)
+fmt.Println(p, *p, i, &i)
+// 0xc0000a4010 2 2 0xc0000a4010
+```
